@@ -1,29 +1,29 @@
-/*
+/* 
+                Read Data from RTDB 
 
-Read Data from the RTDB(Real-time database) 
 
 */
 
-import { ref, child, get } from "firebase/database";
-
-import { db } from "./../../config/firebase/firebaseInit"
+import { ref, get } from 'firebase/database';
+import { db } from './config/firebase/firebaseInit';
 
 /* 
+          1. connect to the to do list
+               reference  ref
+               const dbRef = ref(db, "/todos")
 
-connecting to the to-do list
-    1. create a reference const -> dbRef= ref(db, '/todos')
-asking for the data
-    1. creates a path to the node in the JSON file 
-    2. using get(ref) we get a data snapshot 
-extracting the data
-1. snapshot.val
+          Asking for the data from that ref   path to a node in the JSON file...
+          get(ref)===> data snapshot
+
+          extracting the data
+          snapshot.val()
 
 */
 
 async function getToDoData() {
-    const dbRef = ref(db, '/todos');
-    const dataSnapshot = await get(dbRef);
-    return await dataSnapshot.val()
+	const dbRef = ref(db, '/todos');
+	const dataSnapshot = await get(dbRef);
+	return await dataSnapshot.val();
 }
 
-export {getToDoData}
+export { getToDoData };

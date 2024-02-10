@@ -1,16 +1,34 @@
-
+import { toDoItemTemplate } from "./templates/toDoitem";
 import { getToDoData } from "./lib/firebase/api";
-// single source of truth for the data
-let store= [];
-async function appInit(){
-    const toDos= await getToDoData();
-    console.log(toDos)
-}
-
-appInit();
 
 /* 
-
-RTDB returns an Object of Objects
-
+      Display templating
+	  toDoItems.forEach((todo)=>{
+		document.querySelector('#root').insertAdjacentHTML('afterbegin',todo)
+	})
+	console.log(toDoItems)
+	
+	Interactive Templating
+	const div= document.createElement('div');
+	toDoItems.forEach((markup)=>{
+		div.appendChild(markup);
+	})
+	document.querySelector('main').append(div)
+	console.log(div)
+			  
 */
+
+async function appInit() {
+	const appData= await getToDoData();
+	const toDoItems= Object.values(appData).map((obj)=>{
+		return toDoItemTemplate(obj.todo,obj.status,obj.startDate);
+	})
+	const div= document.createElement('div');
+	const firstTen= toDoItems.splice(0,10);
+	firstTen.forEach((markup)=>{
+		div.appendChild(markup);
+	})
+	document.querySelector('main').append(div)
+	console.log(div)	
+}
+appInit();
