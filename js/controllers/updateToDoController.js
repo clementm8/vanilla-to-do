@@ -42,6 +42,7 @@ function onUpdateToDoItem(e){
         status,
         uid
     })
+    dialog.close();
 }
 
 function onCloseDialog(e){
