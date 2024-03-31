@@ -24,10 +24,19 @@ const removeFromStore = (uid) =>{
     return store
 }
 
-const updateStore = (todo) =>{
-    const index= store.findIndex((item) => item.uid === todo.uid)
-    store= [...store.slice(0,index), todo, ...store.slice(index + 1)]
-    return store
+const updateStore = (todo) => {
+    const index = store.findIndex((item) => item.uid === todo.uid);
+
+    if (index !== -1) {
+        // Update existing todo
+        store = [...store.slice(0, index), todo, ...store.slice(index + 1)];
+    } else {
+        // Add new todo
+        store = [...store, todo];
+    }
+
+    return store;
 }
+
 
 export {getStore, createStore, removeFromStore, updateStore}

@@ -2,6 +2,8 @@ import { toDoItemTemplate } from "../templates/toDoItemTemplate";
 import { subscribe } from "../models/toDoListModel";
 import { deleteToDoController } from "../controllers/deleteToDoController";
 import { updateToDoController } from "../controllers/updateToDoController";
+import { createToDoController } from "../controllers/createToDoController";
+
 let view;
 
 export function toDoListView() {
@@ -20,7 +22,7 @@ function render(data) {
     toDoList.append(div);
 }
 
-// determine which button was clicked and pass the id to the deleteToDoController
+// determine which button was clicked and pass the id to the Controller
 function onHandleClick(e){
     switch (e.target.id){
         case 'delete':
@@ -28,6 +30,9 @@ function onHandleClick(e){
             break
         case 'edit':
             updateToDoController(e.target.dataset.uid)
+            break
+        case 'add':
+            createToDoController()
             break
         default:
             null
